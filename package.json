@@ -1,0 +1,32 @@
+{
+  "name": "btfl",
+  "version": "1.0.0",
+  "description": "Better Twitch Follow List",
+  "scripts": {
+    "postinstall": "cp .browserlistrc.packages ./node_modules/svelte",
+    "start": "NODE_ENV=development parcel watch src/manifest.json",
+    "build": "parcel build src/manifest.json"
+  },
+  "author": "Julian Kaindl <kaindl745@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "0.0.99",
+    "@types/jquery": "^3.3.33",
+    "@types/node": "^13.9.0",
+    "crx-hotreload": "^1.0.4",
+    "parcel": "^1.12.4",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.6",
+    "parcel-plugin-web-extension": "^1.6.1",
+    "sass": "^1.26.2",
+    "svelte": "^3.19.2",
+    "svelte-preprocess": "^3.4.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
+}

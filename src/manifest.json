@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Better Twitch Follow List",
+  "short_name": "BTFL",
+  "description": "Improves the stock twitch following list and gives more control",
+  "version": "1.0.0",
+  "author": "Julian Kaindl",
+  "background": {
+    "scripts": ["scripts/background.ts"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.twitch.tv/*"],
+      "css": ["styles/twitch.scss"],
+      "js": ["scripts/twitch.ts"],
+      "all_frames": false
+    }
+  ],
+  "options_ui": {
+    "page": "views/options.html",
+    "open_in_tab": false
+  },
+  "permissions": ["storage"]
+}
