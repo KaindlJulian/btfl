@@ -1,4 +1,5 @@
-<div class="btfl-sidebar">
+<div class="btfl-folder">
+list folder
 </div>
 
 <script lang="ts">
