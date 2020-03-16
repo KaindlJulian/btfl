@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Better Twitch Follow List",
   "short_name": "BTFL",
-  "description": "Improves the stock twitch following list and gives more control",
+  "description": "Improves the stock twitch following list. Create folders to organize your streamers",
   "version": "1.0.0",
   "author": "Julian Kaindl",
   "background": {
