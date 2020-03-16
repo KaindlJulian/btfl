@@ -2,6 +2,7 @@
   import ListFolder from './ListFolder.svelte';
   import jq from 'jquery';
   import {
+    transformToHostObject,
     zst,
     SIDEBAR_TOGGLE,
     SIDEBAR_HEADER,
@@ -27,19 +28,19 @@
   function handleAddedNodes(nodes: NodeList) {
     const avatarUrl = (jq(nodes[0])
       .find('img')
-      .get(0) as HTMLElement).getAttribute('src');
+      .get(0) as HTMLElement).getAttribute('src')!;
 
-    const name = (jq(nodes[0])
-      .find('[data-a-target="side-nav-title"]')
-      .get(0) as HTMLElement).innerText;
+    const data = (nodes[0] as HTMLElement).innerText.split('\n\n');
+    data.push(avatarUrl);
 
-    const game = (jq(nodes[0])
-      .find('[data-a-target="side-nav-game-title"]')
-      .get(0) as HTMLElement).innerText;
+    const isLive =
+      jq(nodes[0]).find('.tw-channel-status-indicator--live').length !== 0;
+
+    const h = transformToHostObject(data, isLive);
   }
 
   function handleRemovedNodes(nodes: NodeList) {
-    //
+    // handle removed nodes ?
   }
 
   function updateHeader() {

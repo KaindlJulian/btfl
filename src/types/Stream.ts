@@ -2,12 +2,13 @@ export interface Stream {
   /** 
    * Title of the stream
    */
-  title: string;
+  title?: string;
 
   /** 
-   * Amount of viewers
+   * Amount of viewers as scraped from twitch.
+   * like: `'3.4K'`
    */
-  viewers: number;
+  viewers: string;
 
   /** 
    * Category/Game of the stream

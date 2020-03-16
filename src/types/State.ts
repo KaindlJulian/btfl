@@ -1,17 +1,17 @@
-import { Stream } from 'stream';
+import { Stream } from './Stream';
 
 export enum HostState {
-  Online,
+  Live,
   Rerunning,
   Offline
 }
 
-export interface Online {
+export interface Live {
   stream: Stream;
-  state: HostState.Online;
+  state: HostState.Live;
 }
 
-export interface Rerun extends Omit<Online, 'state'> {
+export interface Rerun extends Omit<Live, 'state'> {
   state: HostState.Rerunning;
 }
 
