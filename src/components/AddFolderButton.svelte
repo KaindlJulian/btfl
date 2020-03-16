@@ -1,14 +1,24 @@
-<button class="btfl-new-folder tw-align-items-center tw-align-middle tw-border-bottom-left-radius-medium tw-border-bottom-right-radius-medium tw-border-top-left-radius-medium tw-border-top-right-radius-medium tw-button-icon tw-core-button tw-inline-flex tw-interactive tw-justify-content-center tw-overflow-hidden tw-relative">
-  <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M12 12H14V10H16V12H18V14H16V16H14V14H12V12M22 8V18C22 19.11 21.11 20 20 20H4C2.89 20 2 19.11 2 18V6C2 4.89 2.89 4 4 4H10L12 6H20C21.11 6 22 6.89 22 8M20 8H4V18H20V8Z" />
-  </svg>
-</button>
-
 <script lang="ts">
+
 </script>
 
 <style lang="scss" scoped>
-.btfl-new-folder {
-	margin-left: 8px;
-}
+  .btfl-new-folder {
+    margin-left: 8px;
+  }
 </style>
+
+<button
+  class="btfl-new-folder tw-align-items-center tw-align-middle
+  tw-border-bottom-left-radius-medium tw-border-bottom-right-radius-medium
+  tw-border-top-left-radius-medium tw-border-top-right-radius-medium
+  tw-button-icon tw-core-button tw-inline-flex tw-interactive
+  tw-justify-content-center tw-overflow-hidden tw-relative">
+  <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path
+      fill="currentColor"
+      d="M12 12H14V10H16V12H18V14H16V16H14V14H12V12M22 8V18C22 19.11 21.11 20 20
+      20H4C2.89 20 2 19.11 2 18V6C2 4.89 2.89 4 4 4H10L12 6H20C21.11 6 22 6.89
+      22 8M20 8H4V18H20V8Z" />
+  </svg>
+</button>
