@@ -5,6 +5,11 @@
   "description": "Improves the stock twitch following list. Create folders to organize your streamers",
   "version": "1.0.0",
   "author": "Julian Kaindl",
+  "icons": {
+    "16": "assets/icons/logo-16.png",
+    "48": "assets/icons/logo-48.png",
+    "128": "assets/icons/logo-128.png"
+  },
   "background": {
     "scripts": ["scripts/background.ts"],
     "persistent": false
