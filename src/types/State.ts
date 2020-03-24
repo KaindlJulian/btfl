@@ -3,7 +3,7 @@ import { Stream } from './Stream';
 export enum HostState {
   Live,
   Rerunning,
-  Offline
+  Offline,
 }
 
 export interface Live {
@@ -16,6 +16,6 @@ export interface Rerun extends Omit<Live, 'state'> {
 }
 
 export interface Offline {
-  videos: number;
+  videos: string;
   state: HostState.Offline;
 }

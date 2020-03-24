@@ -4,7 +4,7 @@ import { Stream } from './Stream';
 export abstract class Host {
   readonly name: string;
   readonly imgUrl: string;
-  readonly abstract state: HostState;
+  abstract readonly state: HostState;
 
   constructor(name: string, imgUrl: string) {
     this.name = name;
@@ -37,10 +37,10 @@ export class RerunningHost extends Host implements Rerun {
 }
 
 export class OfflineHost extends Host implements Offline {
-  videos: number;
+  videos: string;
   state: HostState.Offline = HostState.Offline;
 
-  constructor(name: string, videos: number, imgUrl: string) {
+  constructor(name: string, videos: string, imgUrl: string) {
     super(name, imgUrl);
     this.videos = videos;
   }

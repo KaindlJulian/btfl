@@ -1,5 +1,6 @@
 <script lang="ts">
-  import ListFolder from './ListFolder.svelte';
+  import { onMount, tick } from 'svelte';
+  import HostCard from './HostCard.svelte';
   import jq from 'jquery';
   import {
     transformToHostObject,
@@ -8,9 +9,8 @@
     SIDEBAR_HEADER,
     SIDEBAR_CONTENTS,
   } from '../utils';
-  import { onMount, tick } from 'svelte';
 
-  let list = [];
+  let hosts = [];
 
   const observer = new MutationObserver((mutations, observer) => {
     for (let m of mutations) {
@@ -18,30 +18,32 @@
         if (m.addedNodes.length > 0) {
           handleAddedNodes(m.addedNodes);
         }
-        if (m.removedNodes.length > 0) {
-          handleRemovedNodes(m.removedNodes);
-        }
       }
     }
   });
 
   function handleAddedNodes(nodes: NodeList) {
-    const avatarUrl = (jq(nodes[0])
-      .find('img')
-      .get(0) as HTMLElement).getAttribute('src')!;
-
     const data = (nodes[0] as HTMLElement).innerText.split('\n\n');
-    data.push(avatarUrl);
+
+    const avatar = (jq(nodes[0])
+      .find('img')
+      .get(0) as HTMLElement);
+
+    if (!avatar || !avatar.getAttribute('src')) {
+      return;
+    }
+    data.push(avatar.getAttribute('src')!);
 
     const isLive =
       jq(nodes[0]).find('.tw-channel-status-indicator--live').length !== 0;
 
-    const h = transformToHostObject(data, isLive);
+    const host = transformToHostObject(data, isLive);
+
+    if (host.name !== 'RECOMMENDED CHANNELS') {
+      hosts = [...hosts, host];
+    }    
   }
 
-  function handleRemovedNodes(nodes: NodeList) {
-    // handle removed nodes ?
-  }
 
   function updateHeader() {
     tick().then(async () => {
@@ -75,5 +77,7 @@
 
 <div class="btfl">
   <div class="btfl-header" />
-  <ListFolder />
+	{#each hosts as h (h.name)}
+    <HostCard host={h}/>
+	{/each}
 </div>
