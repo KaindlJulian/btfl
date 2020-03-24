@@ -12,18 +12,18 @@ import {
 const twitchSidebarContent = $(SIDEBAR_CONTENTS).first();
 const btflContainer = document.createElement('div');
 $(btflContainer).insertAfter(twitchSidebarContent);
-const btfl = bindComponent(FollowList, btflContainer);
+bindComponent(FollowList, btflContainer);
 
 function initMenu() {
   const twitchSidebarSearch = document.querySelector(SIDEBAR_SEARCH_FIELD)!;
 
   const settingsContainer = document.createElement('div');
   $(settingsContainer).insertAfter(twitchSidebarSearch);
-  const settingsButton = bindComponent(SettingsButton, settingsContainer);
+  bindComponent(SettingsButton, settingsContainer);
 
   const addFolderContainer = document.createElement('div');
   $(addFolderContainer).insertAfter(twitchSidebarSearch);
-  const addFolderButton = bindComponent(AddFolderButton, addFolderContainer);
+  bindComponent(AddFolderButton, addFolderContainer);
 }
 
 initMenu();

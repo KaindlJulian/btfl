@@ -1,7 +1,5 @@
 import { Host, LiveHost, OfflineHost, Stream, RerunningHost } from '../types';
 
-type dataQuadruple = [string, string, string, string];
-
 /**
  * Transforms data scraped from twitch to internally used Host Objects
  *
@@ -12,11 +10,15 @@ type dataQuadruple = [string, string, string, string];
  * @returns {Host} A host object. Either Online, Offline or Rerunning
  */
 export function transformToHostObject(
-  data: dataQuadruple,
+  data: string[],
+  imgUrl: string,
   isLive: boolean
 ): Host {
-  if (data[2].toLowerCase() === 'offline') {
-    return new OfflineHost(data[0], data[1], data[3]);
+  if (data.includes('Offline')) {
+    if (data[1] === 'Offline') {
+      return new OfflineHost(data[0], 'No new videos', imgUrl);
+    }
+    return new OfflineHost(data[0], data[1], imgUrl);
   }
 
   const stream: Stream = {
@@ -25,8 +27,8 @@ export function transformToHostObject(
   };
 
   if (isLive) {
-    return new LiveHost(data[0], stream, data[3]);
+    return new LiveHost(data[0], stream, imgUrl);
   }
 
-  return new RerunningHost(data[0], stream, data[3]);
+  return new RerunningHost(data[0], stream, imgUrl);
 }

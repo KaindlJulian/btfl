@@ -37,6 +37,7 @@
     justify-content: baseline;
     span {
       margin-left: 4px;
+      opacity: 0.8;
     }
   }
 }
