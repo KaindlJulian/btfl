@@ -1,5 +1,9 @@
 <script lang="ts">
   export let host;
+
+  function navigateStream() {
+    window.location.href = host.directLink;
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -7,7 +11,8 @@
   padding: 5px 10px;
   width: 100%;
   min-height: 32px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 32px 1fr minmax(48px, auto);
   cursor: pointer;
 
   &__avatar {
@@ -31,10 +36,9 @@
   &__status {
     min-width: 4rem;
     flex-shrink: 0;
-    margin-left: 8px;
     display: flex;
     align-items: center;
-    justify-content: baseline;
+    justify-content: center;
     span {
       margin-left: 4px;
       opacity: 0.8;
@@ -43,7 +47,7 @@
 }
 </style>
 
-<div class="btfl-card side-nav-card__link"> 
+<div class="btfl-card side-nav-card__link" on:click={navigateStream}> 
   <div class="btfl-card__avatar">
     <img src="{host.imgUrl}" alt="" class="{host.state === 2 ? 'greyscale' :''}">
   </div>

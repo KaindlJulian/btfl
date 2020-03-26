@@ -13,10 +13,8 @@
 </script>
 
 <style lang="scss">
-  .btfl-folder {
-    padding: 5px 10px;   
-  }
 	.header {
+		padding: 5px 10px;   
 		display: flex;
     align-items: center;
 		width: 100%;

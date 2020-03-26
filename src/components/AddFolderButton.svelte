@@ -1,17 +1,33 @@
 <script lang="ts">
+  import { tick } from 'svelte';
+
   let showDialog = false;
 
   function toggleDialog() {
-    showDialog = !showDialog;    
+    showDialog = !showDialog;
+    
+    tick().then(() => {
+      document.getElementById('btfl-new-folder-input')!.focus();
+    });
   }
 
-  function createFolder() {
+  function createFolder(event) {    
     const name = document.getElementById('btfl-new-folder-input')!.value;
-    if (!name) {
+
+    if (name === '') {
       showDialog = false;
     } else {
       const container = document.getElementById('btfl-new-folder')!;
       container.appendChild(document.createTextNode(name));
+    }
+  }
+
+  function handleKeydown(event) {
+		if (event.keyCode === 13) {
+      createFolder();
+    }
+    if (event.keyCode === 27) {
+      showDialog = false;
     }
   }
 </script>
@@ -48,8 +64,8 @@
   </svg>
   {#if showDialog}
 		<div class="btfl-new-folder-popup">
-      <input on:click|preventDefault|stopPropagation={() => {}} placeholder="Folder Name" id="btfl-new-folder-input" name="folder-name" type="text" class="tw-block tw-border-bottom-left-radius-medium tw-border-bottom-right-radius-medium tw-border-top-left-radius-medium tw-border-top-right-radius-medium tw-font-size-6 tw-full-width tw-input tw-pd-l-1 tw-pd-r-1 tw-pd-y-05">
-      <button on:click={createFolder} class="btfl-new-folder tw-align-items-center tw-align-middle
+      <input on:keydown={handleKeydown} on:click|preventDefault|stopPropagation={() => {}} placeholder="Folder Name" id="btfl-new-folder-input" name="folder-name" type="text" class="tw-block tw-border-bottom-left-radius-medium tw-border-bottom-right-radius-medium tw-border-top-left-radius-medium tw-border-top-right-radius-medium tw-font-size-6 tw-full-width tw-input tw-pd-l-1 tw-pd-r-1 tw-pd-y-05">
+      <button on:click|stopPropagation={createFolder} class="btfl-new-folder tw-align-items-center tw-align-middle
   tw-border-bottom-left-radius-medium tw-border-bottom-right-radius-medium
   tw-border-top-left-radius-medium tw-border-top-right-radius-medium
   tw-button-icon tw-core-button tw-inline-flex tw-interactive

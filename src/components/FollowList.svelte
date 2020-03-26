@@ -31,7 +31,6 @@
       if (m.type === 'childList') {
         if (m.addedNodes.length > 0) {          
           const newFolder = new Folder(m.addedNodes[0].textContent);
-          newFolder.addHost(hosts[0]);                                           //! remove this after testing
           folders = [...folders, newFolder];          
         }
       }
@@ -80,17 +79,53 @@
     subtree: true,
   });
 
-  onMount(async () => {
+  onMount(() => {
     updateHeader();
+
     folderObserver.observe(jq('#btfl-new-folder').get(0), {
       childList: true,
       subtree: true,
     });
+
+    chrome.storage.sync.get(['rootFolders'], function(result) {
+      console.log('folders currently is ' + result.key);
+    });
+    chrome.storage.sync.get(['rootHosts'], function(result) {
+      console.log('hosts currently is ' + result.key);
+    });
+
+    setTimeout(() => {
+      setInterval(() => {
+        if (jq('[data-a-target="side-nav-show-more-button"]').length > 1) {
+          jq('[data-a-target="side-nav-show-more-button"]').first().click();
+        }
+      }, 500);  
+    }, 2000);
   });
 
   jq(SIDEBAR_TOGGLE).on('click', async () => {
     updateHeader();
   });
+
+  function saveStateToStorage() {
+    const rootFolders = folders.map(folder => {
+      const folderHostNames = folder.hosts.map(h => h.name);
+      return {
+        folderName: folder.name,
+        hostNames: folderHostNames
+      }
+    });
+
+    const rootHosts = hosts.map(h => h.name);
+    
+    chrome.storage.sync.set({'rootFolders': rootFolders}, () => {
+      console.log('folders saved');
+      
+    });
+    chrome.storage.sync.set({'rootHosts': rootHosts}, () => {
+      console.log('hosts saved');
+    });
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -100,6 +135,7 @@
     left: -9999px;
   }
   &__folders {
+    margin-bottom: 8px;
     border-bottom: var(--border-width-default) solid var(--color-border-base)!important;
   }
 }
